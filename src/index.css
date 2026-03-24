@@ -14,7 +14,7 @@ body,
 }
 
 body {
-  font-family: 'Ridley Grotesk Demo-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #F4F6FA;
