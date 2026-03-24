@@ -4,10 +4,10 @@ import "./AddStudent.css";
 // ─── Step Config ──────────────────────────────────────────────────────────────
 const STEPS = [
   { id: 1, key: "personal_contact_identity", label: "Personal, Contact & Identity", icon: "⬡", sub: "Basic info, address & passport" },
-  { id: 2, key: "education",    label: "Education",           icon: "⬡", sub: "Academic background" },
-  { id: 3, key: "preferences_background",  label: "Study Prefs & Background",   icon: "⬡", sub: "Goals, visa & history" },
-  { id: 4, key: "documents",    label: "Documents",           icon: "⬡", sub: "Upload required files" },
-  { id: 5, key: "application",  label: "Application",         icon: "⬡", sub: "Create & review" },
+  { id: 2, key: "education", label: "Education", icon: "⬡", sub: "Academic background" },
+  { id: 3, key: "preferences_background", label: "Study Prefs & Background", icon: "⬡", sub: "Goals, visa & history" },
+  { id: 4, key: "documents", label: "Documents", icon: "⬡", sub: "Upload required files" },
+  { id: 5, key: "application", label: "Application", icon: "⬡", sub: "Create & review" },
 ];
 
 // ─── Reusable Field Components ─────────────────────────────────────────────────
