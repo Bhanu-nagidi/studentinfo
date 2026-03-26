@@ -66,7 +66,6 @@ const StepPersonal = ({ data, setData }) => {
         <h2>Personal Information</h2>
         <p>Start with the student's basic personal details. Fields marked <span className="as-req">*</span> are required.</p>
       </div>
-
       <div className="as-card">
         <SectionHeader icon="👤" title="Basic Details" />
         <div className="as-grid-2">
@@ -129,7 +128,7 @@ const StepPersonal = ({ data, setData }) => {
               <option>Ahmed Khan</option>
             </Select>
           </Field>
-          <Field label="Lead Source">
+          {/* <Field label="Lead Source">
             <Select value={data.leadSource || ""} onChange={set("leadSource")}>
               <option value="">How did they find us?</option>
               <option>Walk-in</option>
@@ -139,7 +138,7 @@ const StepPersonal = ({ data, setData }) => {
               <option>Education Fair</option>
               <option>Other</option>
             </Select>
-          </Field>
+          </Field>*/}
         </div>
       </div>
     </div>
@@ -258,7 +257,7 @@ const StepPassport = ({ data, setData }) => {
       </div>
 
       <div className="as-card">
-        <SectionHeader icon="🛂" title="Passport Details" />
+        <SectionHeader title="Passport Details" />
         <div className="as-grid-2">
           <Field label="Passport Number" required>
             <Input placeholder="e.g. A1234567" value={data.passportNo || ""} onChange={set("passportNo")} />
@@ -285,7 +284,7 @@ const StepPassport = ({ data, setData }) => {
         </div>
       </div>
 
-      <div className="as-card">
+      {/*<div className="as-card">
         <SectionHeader icon="🪪" title="Additional Identity" />
         <div className="as-grid-2">
           <Field label="National ID / Aadhaar / CNIC">
@@ -295,7 +294,7 @@ const StepPassport = ({ data, setData }) => {
             <Input type="date" value={data.idIssue || ""} onChange={set("idIssue")} />
           </Field>
         </div>
-      </div>
+      </div>*/}
     </div>
   );
 };
@@ -304,7 +303,21 @@ const StepPassport = ({ data, setData }) => {
 const StepEducation = ({ data, setData }) => {
   const set = (k) => (e) => setData({ ...data, [k]: e.target.value });
   const toggle = (k) => setData({ ...data, [k]: !data[k] });
-  const [scoreType, setScoreType] = useState("Percentage");
+
+  const quals = data.qualifications || [];
+  const [currentQual, setCurrentQual] = useState({ scoreType: "Percentage" });
+
+  const setQ = (k) => (e) => setCurrentQual({ ...currentQual, [k]: e.target.value });
+  const toggleQ = (k) => setCurrentQual({ ...currentQual, [k]: !currentQual[k] });
+
+  const saveQual = () => {
+    if (currentQual.eduLevel && currentQual.boardCountry) {
+      setData({ ...data, qualifications: [...quals, { ...currentQual, id: Date.now() }] });
+      setCurrentQual({ scoreType: "Percentage" });
+    } else {
+      alert("Please fill required fields (Level, Country) to add.");
+    }
+  };
 
   const testTypes = ["IELTS", "TOEFL", "PTE", "Duolingo", "SAT", "GRE", "GMAT", "Other"];
 
@@ -315,15 +328,29 @@ const StepEducation = ({ data, setData }) => {
         <p>Academic history, proficiency scores and work experience.</p>
       </div>
 
+      {quals.length > 0 && (
+        <div className="as-apps-list" style={{ marginBottom: "0.5rem" }}>
+          {quals.map((q, i) => (
+            <div key={q.id} className="as-app-chip">
+              <span className="as-app-num">Qual #{i + 1}</span>
+              <span className="as-app-name">{q.eduLevel}</span>
+              <span className="as-app-course">{q.courseName || q.boardName}</span>
+              <span className="as-app-intake">{q.score ? `${q.score} ${q.scoreType}` : ""}</span>
+              <button className="as-doc-remove" onClick={() => setData({ ...data, qualifications: quals.filter((x) => x.id !== q.id) })}>✕</button>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="as-card">
         <SectionHeader
           icon="🎓"
           title="Academic Qualification"
-          action={<button className="as-btn-secondary">+ Add Another</button>}
+          action={<button className="as-btn-secondary" onClick={saveQual}>+ Add Qualification</button>}
         />
         <div className="as-grid-2">
           <Field label="Highest Education Level" required>
-            <Select value={data.eduLevel || ""} onChange={set("eduLevel")}>
+            <Select value={currentQual.eduLevel || ""} onChange={setQ("eduLevel")}>
               <option value="">Select level</option>
               <option>High School (10th)</option>
               <option>Senior Secondary (12th)</option>
@@ -334,7 +361,7 @@ const StepEducation = ({ data, setData }) => {
             </Select>
           </Field>
           <Field label="Board / University Country" required>
-            <Select value={data.boardCountry || ""} onChange={set("boardCountry")}>
+            <Select value={currentQual.boardCountry || ""} onChange={setQ("boardCountry")}>
               <option value="">Select country</option>
               <option>India</option>
               <option>Pakistan</option>
@@ -344,19 +371,19 @@ const StepEducation = ({ data, setData }) => {
             </Select>
           </Field>
           <Field label="Board / University Name" required>
-            <Input placeholder="e.g. CBSE, Osmania University" value={data.boardName || ""} onChange={set("boardName")} />
+            <Input placeholder="e.g. CBSE, Osmania University" value={currentQual.boardName || ""} onChange={setQ("boardName")} />
           </Field>
           <Field label="Course / Degree Name">
-            <Input placeholder="e.g. B.Tech Computer Science" value={data.courseName || ""} onChange={set("courseName")} />
+            <Input placeholder="e.g. B.Tech Computer Science" value={currentQual.courseName || ""} onChange={setQ("courseName")} />
           </Field>
           <Field label="Start Date">
-            <Input type="date" value={data.eduStart || ""} onChange={set("eduStart")} />
+            <Input type="date" value={currentQual.eduStart || ""} onChange={setQ("eduStart")} />
           </Field>
           <Field label="End Date">
             <div className="as-end-date-row">
-              <Input type="date" value={data.eduEnd || ""} onChange={set("eduEnd")} disabled={data.pursuing} />
+              <Input type="date" value={currentQual.eduEnd || ""} onChange={setQ("eduEnd")} disabled={currentQual.pursuing} />
               <label className="as-checkbox-label">
-                <input type="checkbox" checked={data.pursuing || false} onChange={() => toggle("pursuing")} />
+                <input type="checkbox" checked={currentQual.pursuing || false} onChange={() => toggleQ("pursuing")} />
                 Currently pursuing
               </label>
             </div>
@@ -367,15 +394,15 @@ const StepEducation = ({ data, setData }) => {
           <label className="as-label">Score Type <span className="as-req">*</span></label>
           <div className="as-score-tabs">
             {["Percentage", "Grade", "GPA", "Other"].map((t) => (
-              <button key={t} className={`as-score-tab ${scoreType === t ? "active" : ""}`} onClick={() => setScoreType(t)}>
+              <button key={t} className={`as-score-tab ${currentQual.scoreType === t ? "active" : ""}`} onClick={() => setCurrentQual({ ...currentQual, scoreType: t })}>
                 {t}
               </button>
             ))}
           </div>
           <Input
-            placeholder={`Enter ${scoreType}`}
-            value={data.score || ""}
-            onChange={set("score")}
+            placeholder={`Enter ${currentQual.scoreType}`}
+            value={currentQual.score || ""}
+            onChange={setQ("score")}
             style={{ marginTop: "0.75rem" }}
           />
         </div>
@@ -564,7 +591,7 @@ const StepPreferences = ({ data, setData }) => {
           />
         </Field>
       </div>
-    </div>
+    </div >
   );
 };
 
@@ -573,6 +600,120 @@ const StepBackground = ({ data, setData }) => {
   const set = (k) => (e) => setData({ ...data, [k]: e.target.value });
   const radio = (k) => (v) => setData({ ...data, [k]: v });
 
+  // Generic structured entry form for Visa Refusal / Visa History
+  const VisaEntryForm = ({ field, listField }) => {
+    const entries = data[listField] || [];
+    const [current, setCurrent] = useState({ visaCategory: "", country: "", date: "", description: "" });
+    const setC = (k) => (e) => setCurrent({ ...current, [k]: e.target.value });
+
+    const save = () => {
+      if (current.visaCategory || current.country || current.date) {
+        setData({ ...data, [listField]: [...entries, { ...current, id: Date.now() }] });
+        setCurrent({ visaCategory: "", country: "", date: "", description: "" });
+      }
+    };
+    const remove = (id) => setData({ ...data, [listField]: entries.filter((e) => e.id !== id) });
+
+    if (data[field] !== "yes") return null;
+    return (
+      <div style={{ marginTop: "0.75rem" }}>
+        {entries.map((e, i) => (
+          <div key={e.id} className="as-app-chip" style={{ marginBottom: "0.5rem" }}>
+            <span className="as-app-num">#{i + 1}</span>
+            <span className="as-app-name">{e.visaCategory}</span>
+            <span className="as-app-course">{e.country}</span>
+            <span className="as-app-intake">{e.date}</span>
+            <button className="as-doc-remove" onClick={() => remove(e.id)}>✕</button>
+          </div>
+        ))}
+        <div className="as-visa-entry-form">
+          <div className="as-grid-2" style={{ marginBottom: "0.75rem" }}>
+            <Field label="Visa Type" required>
+              <Select value={current.visaCategory} onChange={setC("visaCategory")}>
+                <option value="">Select Visa Category</option>
+                <option>Student Visa</option>
+                <option>Tourist Visa</option>
+                <option>Work Visa</option>
+                <option>Business Visa</option>
+                <option>Dependent Visa</option>
+                <option>Other</option>
+              </Select>
+            </Field>
+            <Field label="Country" required>
+              <Select value={current.country} onChange={setC("country")}>
+                <option value="">Select Country</option>
+                <option>UK</option><option>USA</option><option>Canada</option>
+                <option>Australia</option><option>Germany</option><option>Ireland</option>
+                <option>New Zealand</option><option>France</option><option>Netherlands</option>
+                <option>India</option><option>Other</option>
+              </Select>
+            </Field>
+            <Field label="Date of Travel" required>
+              <Input type="date" value={current.date} onChange={setC("date")} />
+            </Field>
+          </div>
+          <Field label="Description" required>
+            <textarea
+              className="as-textarea"
+              placeholder="Enter Visa description"
+              value={current.description}
+              onChange={setC("description")}
+              rows={3}
+            />
+          </Field>
+          <div className="as-app-actions" style={{ marginTop: "0.75rem" }}>
+            <button className="as-btn-primary" style={{ fontSize: "0.8rem", padding: "0.4rem 1rem" }} onClick={save}>💾 Save</button>
+            <button className="as-btn-ghost" style={{ fontSize: "0.8rem", padding: "0.4rem 1rem", color: "#e53e3e" }} onClick={() => setCurrent({ visaCategory: "", country: "", date: "", description: "" })}>🗑 Remove</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Structured Medical Entry Form
+  const MedicalEntryForm = ({ field, listField }) => {
+    const entries = data[listField] || [];
+    const [current, setCurrent] = useState({ fromDate: "", endDate: "" });
+    const setC = (k) => (e) => setCurrent({ ...current, [k]: e.target.value });
+
+    const save = () => {
+      if (current.fromDate || current.endDate) {
+        setData({ ...data, [listField]: [...entries, { ...current, id: Date.now() }] });
+        setCurrent({ fromDate: "", endDate: "" });
+      }
+    };
+    const remove = (id) => setData({ ...data, [listField]: entries.filter((e) => e.id !== id) });
+
+    if (data[field] !== "yes") return null;
+    return (
+      <div style={{ marginTop: "0.75rem" }}>
+        {entries.map((e, i) => (
+          <div key={e.id} className="as-app-chip" style={{ marginBottom: "0.5rem" }}>
+            <span className="as-app-num">#{i + 1}</span>
+            <span className="as-app-name">From: {e.fromDate}</span>
+            <span className="as-app-intake">To: {e.endDate}</span>
+            <button className="as-doc-remove" onClick={() => remove(e.id)}>✕</button>
+          </div>
+        ))}
+        <div className="as-visa-entry-form">
+          <div className="as-grid-2" style={{ marginBottom: "0.75rem" }}>
+            <Field label="From Date" required>
+              <Input type="date" value={current.fromDate} onChange={setC("fromDate")} />
+            </Field>
+            <Field label="To Date" required>
+              <Input type="date" value={current.endDate} onChange={setC("endDate")} />
+            </Field>
+          </div>
+          <div className="as-app-actions" style={{ marginTop: "0.75rem" }}>
+            <button className="as-btn-primary" style={{ fontSize: "0.8rem", padding: "0.4rem 1rem" }} onClick={save}>💾 Save</button>
+            <button className="as-btn-ghost" style={{ fontSize: "0.8rem", padding: "0.4rem 1rem", color: "#e53e3e" }} onClick={() => setCurrent({ fromDate: "", endDate: "" })}>🗑 Remove</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Simple YesNo with textarea (for disability & criminal)
   const YesNo = ({ label, field, detail, detailLabel }) => (
     <div className="as-yesno-card">
       <div className="as-yesno-row">
@@ -594,6 +735,33 @@ const StepBackground = ({ data, setData }) => {
           style={{ marginTop: "0.75rem" }}
         />
       )}
+    </div>
+  );
+
+  // Structured YesNo card wrapper
+  const StructuredYesNo = ({ label, field, children, addLabel }) => (
+    <div className="as-yesno-card">
+      <div className="as-yesno-row">
+        <span className="as-yesno-label">{label}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <RadioGroup
+            name={field}
+            options={[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }]}
+            value={data[field] || "no"}
+            onChange={radio(field)}
+          />
+          {data[field] === "yes" && (
+            <button
+              className="as-btn-secondary"
+              style={{ fontSize: "0.75rem", padding: "0.3rem 0.75rem", whiteSpace: "nowrap" }}
+              onClick={(e) => e.preventDefault()}
+            >
+              + {addLabel || "Add Visa History"}
+            </button>
+          )}
+        </div>
+      </div>
+      {children}
     </div>
   );
 
@@ -639,9 +807,23 @@ const StepBackground = ({ data, setData }) => {
       <div className="as-card">
         <SectionHeader icon="🔍" title="Background Declarations" />
         <div className="as-declarations">
-          <YesNo label="Does the student have any Visa Refusal history?" field="visaRefusal" detail="visaRefusalDetail" detailLabel="Which country, when, and reason for refusal..." />
-          <YesNo label="Does the student have any previous Visa History?" field="visaHistory" detail="visaHistoryDetail" detailLabel="List previous visas (country, type, dates)..." />
-          <YesNo label="Does the student have any serious Medical Condition?" field="medical" detail="medicalDetail" detailLabel="Please describe the medical condition..." />
+
+          {/* ── Visa Refusal ── */}
+          <StructuredYesNo label="Does the student have any Visa Refusal history?" field="visaRefusal" addLabel="Add Visa History">
+            <VisaEntryForm field="visaRefusal" listField="visaRefusalEntries" />
+          </StructuredYesNo>
+
+          {/* ── Visa History ── */}
+          <StructuredYesNo label="Does the student have any previous Visa History?" field="visaHistory" addLabel="Add Visa History">
+            <VisaEntryForm field="visaHistory" listField="visaHistoryEntries" />
+          </StructuredYesNo>
+
+          {/* ── Medical Condition ── */}
+          <StructuredYesNo label="Does the student have any serious Medical Condition?" field="medical" addLabel="Add Medical Record">
+            <MedicalEntryForm field="medical" listField="medicalEntries" />
+          </StructuredYesNo>
+
+          {/* ── Disability & Criminal remain simple ── */}
           <YesNo label="Does the student have any Disability?" field="disability" detail="disabilityDetail" detailLabel="Please describe the disability and any accommodations needed..." />
           <YesNo label="Does the student have any Criminal Offence Record?" field="criminal" detail="criminalDetail" detailLabel="Please provide details of the offence and outcome..." />
         </div>
@@ -909,8 +1091,8 @@ export default function AddStudent() {
         <div className="as-breadcrumb">
           <span className="as-breadcrumb-link">Dashboard</span>
           <span className="as-breadcrumb-sep">›</span>
-          <span className="as-breadcrumb-link">Applications</span>
-          <span className="as-breadcrumb-sep">›</span>
+          {/* <span className="as-breadcrumb-link">Applications</span>
+          <span className="as-breadcrumb-sep">›</span>*/}
           <span className="as-breadcrumb-current">Add Student</span>
         </div>
         <div className="as-fetch-area">
