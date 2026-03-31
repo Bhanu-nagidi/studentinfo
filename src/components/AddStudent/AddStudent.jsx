@@ -924,9 +924,56 @@ const EnqContact = ({ data, setData }) => {
               <Input placeholder="WhatsApp" value={data.whatsapp || ""} onChange={set("whatsapp")} style={{ flex: 1 }} />
             </div>
           </Field>
-          <Field label="Nationality">
+          <Field label="Assigned Consultant" required>
+            <Sel value={data.owner || ""} onChange={set("owner")}>
+              <option value="">Select consultant</option>
+              <option>Raju Rama (You)</option>
+              <option>Priya Shah</option>
+              <option>Ahmed Khan</option>
+            </Sel>
+          </Field>
+        </div>
+
+        <div className="sp-grid-2" style={{ marginTop: "1.25rem" }}>
+          <Field label="ADDRESS" required>
+            <Input placeholder="Enter Your Address" value={data.address || ""} onChange={set("address")} />
+          </Field>
+          <Field label="SELECT COUNTRY" required>
+            <Sel value={data.country || ""} onChange={set("country")}>
+              <option value="">Select Country</option>
+              <option>India</option>
+              <option>Pakistan</option>
+              <option>Bangladesh</option>
+              <option>Nepal</option>
+              <option>Other</option>
+            </Sel>
+          </Field>
+          <Field label="SELECT STATE" required>
+            <Sel value={data.state || ""} onChange={set("state")}>
+              <option value="">Select State</option>
+              <option>Telangana</option>
+              <option>Maharashtra</option>
+              <option>Karnataka</option>
+              <option>Delhi</option>
+              <option>Other</option>
+            </Sel>
+          </Field>
+          <Field label="SELECT CITY" required>
+            <Sel value={data.city || ""} onChange={set("city")}>
+              <option value="">Select City</option>
+              <option>Hyderabad</option>
+              <option>Mumbai</option>
+              <option>Bangalore</option>
+              <option>Chennai</option>
+              <option>Other</option>
+            </Sel>
+          </Field>
+          <Field label="POSTAL CODE" required>
+            <Input placeholder="Enter Your Postal Code" value={data.postal || ""} onChange={set("postal")} />
+          </Field>
+          <Field label="NATIONALITY" required>
             <Sel value={data.nationality || ""} onChange={set("nationality")}>
-              <option value="">Select nationality</option>
+              <option value="">Select Nationality</option>
               <option>Indian</option>
               <option>Pakistani</option>
               <option>Bangladeshi</option>
@@ -936,19 +983,39 @@ const EnqContact = ({ data, setData }) => {
               <option>Other</option>
             </Sel>
           </Field>
-        </div>
-        <div className="sp-grid-2" style={{ marginTop: "1.25rem" }}>
-          <Field label="City">
-            <Input placeholder="City" value={data.city || ""} onChange={set("city")} />
+          <Field label="PASSPORT NUMBER" required>
+            <Input placeholder="Enter Your Passport Number" value={data.passportNo || ""} onChange={set("passportNo")} />
           </Field>
-          <Field label="Assigned Consultant" required>
-            <Sel value={data.owner || ""} onChange={set("owner")}>
-              <option value="">Select consultant</option>
-              <option>Raju Rama (You)</option>
-              <option>Priya Shah</option>
-              <option>Ahmed Khan</option>
+          <Field label="CURRENT EDUCATION" required>
+            <Input placeholder="Enter Your Current Education" value={data.currentEducation || ""} onChange={set("currentEducation")} />
+          </Field>
+          <Field label="COUNTRY INTERESTED" required>
+            <Sel value={data.countryInterested || ""} onChange={set("countryInterested")}>
+              <option value="">Select Country Interested</option>
+              <option>UK</option>
+              <option>USA</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>Germany</option>
+              <option>Ireland</option>
+              <option>New Zealand</option>
+              <option>Other</option>
             </Sel>
           </Field>
+          <Field label="PREVIOUS VISA" required>
+            <Sel value={data.previousVisa || ""} onChange={set("previousVisa")}>
+              <option value="">Select Previous Visa</option>
+              <option>None</option>
+              <option>Student Visa</option>
+              <option>Tourist Visa</option>
+              <option>Work Visa</option>
+              <option>Business Visa</option>
+              <option>Rejected</option>
+            </Sel>
+          </Field>
+        </div>
+        <div style={{ marginTop: "1.25rem" }}>
+          <textarea className="sp-textarea" placeholder="Enter notes here..." value={data.notes || ""} onChange={set("notes")} rows={4} style={{ width: "100%", height: "100px", padding: "10px", borderRadius: "6px", border: "1px solid #ddd" }} />
         </div>
       </div>
     </div>
