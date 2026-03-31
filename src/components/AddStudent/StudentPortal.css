@@ -1,0 +1,1572 @@
+/* ─── Google Fonts ──────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ─── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --navy-950: #060E20;
+  --navy-900: #0B1A36;
+  --navy-800: #0F2147;
+  --navy-700: #162E61;
+  --navy-600: #1E3F84;
+  --navy-500: #2553A8;
+  --navy-400: #3B6AC4;
+  --navy-100: #D4E0F5;
+  --navy-50: #EEF3FC;
+
+  --gold-500: #D4A017;
+  --gold-400: #F0B429;
+  --gold-300: #FAC84A;
+  --gold-100: #FEF3CD;
+  --gold-50: #FFFBEF;
+
+  --teal-500: #0E8A7A;
+  --teal-100: #CCEFEB;
+
+  --slate-900: #1A2236;
+  --slate-700: #374260;
+  --slate-500: #5C6B8A;
+  --slate-300: #A8B4CC;
+  --slate-100: #E8EDF5;
+  --slate-50: #F4F6FA;
+
+  --green-500: #1A9E6B;
+  --green-100: #C8EDDF;
+  --red-500: #D63030;
+  --red-100: #FCE0E0;
+
+  --white: #FFFFFF;
+  --border: #DDE3F0;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.05);
+
+  --font: 'Inter', sans-serif;
+  --sidebar-w: 280px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font);
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font);
+}
+
+/* ─── Root ──────────────────────────────────────────────────────────────────── */
+.sp-root {
+  min-height: 100vh;
+  background: var(--slate-50);
+  font-family: var(--font);
+  color: var(--slate-900);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Topbar ────────────────────────────────────────────────────────────────── */
+.sp-topbar {
+  background: linear-gradient(90deg, #1C5D96 0%, #164E85 50%, #102040 100%);
+  padding: 0 2rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.sp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+}
+
+.sp-breadcrumb-link {
+  color: var(--navy-100);
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.sp-breadcrumb-link:hover {
+  opacity: 1;
+}
+
+.sp-breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.sp-breadcrumb-current {
+  color: var(--gold-300);
+  font-weight: 500;
+}
+
+.sp-fetch-area {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sp-fetch-input {
+  width: 280px;
+  padding: 0.45rem 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-size: 0.82rem;
+  transition: all 0.2s;
+}
+
+.sp-fetch-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sp-fetch-input:focus {
+  outline: none;
+  border-color: var(--gold-400);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.sp-fetch-btn {
+  padding: 0.45rem 1.2rem;
+  background: var(--gold-400);
+  color: var(--navy-900);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.sp-fetch-btn:hover {
+  background: var(--gold-300);
+  transform: translateY(-1px);
+}
+
+/* ─── Progress Bar ──────────────────────────────────────────────────────────── */
+.sp-progress-outer {
+  height: 3px;
+  background: var(--navy-800);
+}
+
+.sp-progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-400), var(--gold-300));
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Body Layout ───────────────────────────────────────────────────────────── */
+.sp-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────────────────────── */
+.sp-sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #1C5D96 0%, #174C80 40%, #102040 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 59px;
+  height: calc(100vh - 59px);
+  overflow-y: auto;
+}
+
+.sp-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 1.25rem;
+}
+
+.sp-brand-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-300));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.sp-brand-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.sp-brand-sub {
+  font-size: 0.73rem;
+  color: var(--navy-100);
+  opacity: 0.55;
+  margin-top: 1px;
+}
+
+/* ─── Sidebar Mode Toggle ───────────────────────────────────────────────────── */
+.sp-mode-toggle {
+  display: flex;
+  gap: 4px;
+  margin: 0 0.75rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  padding: 4px;
+}
+
+.sp-mode-btn {
+  flex: 1;
+  padding: 0.4rem 0.5rem;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.2s;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.sp-mode-btn.active {
+  background: var(--gold-400);
+  color: var(--navy-900);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.sp-mode-btn:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ─── Steps Nav ─────────────────────────────────────────────────────────────── */
+.sp-steps-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 0.75rem;
+}
+
+.sp-step-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 50px;
+  text-align: left;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.sp-step-btn.pending {
+  opacity: 0.45;
+}
+
+.sp-step-btn.pending:hover {
+  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sp-step-btn.done {
+  opacity: 0.8;
+}
+
+.sp-step-btn.done:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sp-step-btn.active {
+  background: #4096D8;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+
+.sp-step-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.sp-step-btn.pending .sp-step-indicator {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sp-step-btn.done .sp-step-indicator {
+  background: var(--green-500);
+  color: #fff;
+}
+
+.sp-step-btn.active .sp-step-indicator {
+  background: #fff;
+  color: #4096D8;
+  font-weight: 700;
+}
+
+.sp-step-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.sp-step-label {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.sp-step-btn.active .sp-step-label {
+  font-weight: 700;
+}
+
+.sp-step-sub {
+  display: block;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sp-sidebar-footer {
+  padding: 1.25rem 1.5rem 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin-top: 1rem;
+}
+
+.sp-progress-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.5rem;
+  text-align: right;
+}
+
+.sp-progress-mini {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.sp-progress-mini-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-400), var(--gold-300));
+  border-radius: 99px;
+  transition: width 0.5s ease;
+}
+
+/* ─── Main Content ──────────────────────────────────────────────────────────── */
+.sp-main {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--slate-50);
+}
+
+.sp-main-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 6rem;
+}
+
+/* ─── Step Content ──────────────────────────────────────────────────────────── */
+.sp-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sp-step-intro {
+  margin-bottom: 0.5rem;
+}
+
+.sp-step-intro h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.sp-step-intro p {
+  margin-top: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--slate-500);
+  line-height: 1.6;
+}
+
+/* ─── Card ──────────────────────────────────────────────────────────────────── */
+.sp-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+
+.sp-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Section Header ────────────────────────────────────────────────────────── */
+.sp-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.sp-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.sp-section-icon {
+  font-size: 1rem;
+}
+
+.sp-section-title h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy-700);
+  letter-spacing: -0.01em;
+}
+
+/* ─── Grid Layouts ──────────────────────────────────────────────────────────── */
+.sp-grid-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sp-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+}
+
+.sp-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+}
+
+.sp-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem 1.5rem;
+}
+
+.sp-grid-2+.sp-grid-2,
+.sp-grid-2+.sp-grid-3,
+.sp-grid-3+.sp-grid-2,
+.sp-grid-3+.sp-grid-3,
+.sp-grid-2+.sp-field,
+.sp-grid-3+.sp-field {
+  margin-top: 1.25rem;
+}
+
+/* ─── Field ─────────────────────────────────────────────────────────────────── */
+.sp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.sp-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.sp-req {
+  color: var(--red-500);
+  margin-left: 2px;
+}
+
+/* ─── Input ─────────────────────────────────────────────────────────────────── */
+.sp-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: var(--slate-50);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--slate-900);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+
+.sp-input:focus {
+  outline: none;
+  border-color: var(--navy-500);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(37, 83, 168, 0.08);
+}
+
+.sp-input::placeholder {
+  color: var(--slate-300);
+}
+
+.sp-input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ─── Select ────────────────────────────────────────────────────────────────── */
+.sp-select-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.sp-select {
+  width: 100%;
+  padding: 0.625rem 2rem 0.625rem 0.875rem;
+  background: var(--slate-50);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--slate-900);
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sp-select:focus {
+  outline: none;
+  border-color: var(--navy-500);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(37, 83, 168, 0.08);
+}
+
+.sp-select-arrow {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: var(--slate-500);
+  pointer-events: none;
+}
+
+/* ─── Textarea ──────────────────────────────────────────────────────────────── */
+.sp-textarea {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: var(--slate-50);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--slate-900);
+  resize: vertical;
+  transition: all 0.2s;
+  line-height: 1.6;
+  font-family: var(--font);
+}
+
+.sp-textarea:focus {
+  outline: none;
+  border-color: var(--navy-500);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(37, 83, 168, 0.08);
+}
+
+.sp-textarea::placeholder {
+  color: var(--slate-300);
+}
+
+/* ─── Phone Row ─────────────────────────────────────────────────────────────── */
+.sp-phone-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.sp-phone-row .sp-select-wrap {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+/* ─── Radio Group ───────────────────────────────────────────────────────────── */
+.sp-radio-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sp-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--slate-50);
+}
+
+.sp-radio-label input[type="radio"] {
+  display: none;
+}
+
+.sp-radio-label.active {
+  border-color: var(--navy-500);
+  background: var(--navy-50);
+  color: var(--navy-700);
+}
+
+/* ─── Tags ──────────────────────────────────────────────────────────────────── */
+.sp-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 32px;
+}
+
+.sp-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--navy-50);
+  border: 1px solid var(--navy-100);
+  color: var(--navy-700);
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.sp-tag-remove {
+  font-size: 0.85rem;
+  color: var(--navy-400);
+  transition: color 0.15s;
+}
+
+.sp-tag-remove:hover {
+  color: var(--red-500);
+}
+
+/* ─── Destination Grid ──────────────────────────────────────────────────────── */
+.sp-dest-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.sp-dest-btn {
+  padding: 0.45rem 1.1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--slate-600);
+  background: var(--white);
+  transition: all 0.15s;
+}
+
+.sp-dest-btn:hover {
+  border-color: var(--navy-400);
+  color: var(--navy-600);
+}
+
+.sp-dest-btn.selected {
+  background: var(--navy-700);
+  border-color: var(--navy-700);
+  color: #fff;
+}
+
+/* ─── Score Tabs ────────────────────────────────────────────────────────────── */
+.sp-score-section {
+  margin-top: 1rem;
+}
+
+.sp-score-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.sp-score-tab {
+  padding: 0.35rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--slate-500);
+  background: var(--slate-50);
+  transition: all 0.15s;
+}
+
+.sp-score-tab.active {
+  border-color: var(--navy-500);
+  background: var(--navy-50);
+  color: var(--navy-700);
+}
+
+/* ─── Checkbox ──────────────────────────────────────────────────────────────── */
+.sp-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--slate-500);
+  cursor: pointer;
+}
+
+/* ─── Info Box ──────────────────────────────────────────────────────────────── */
+.sp-info-box {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--gold-50);
+  border: 1px solid var(--gold-100);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  color: #7A5A00;
+  line-height: 1.5;
+}
+
+/* ─── Yes/No Declarations ───────────────────────────────────────────────────── */
+.sp-declarations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sp-yesno-card {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--slate-50);
+  transition: border-color 0.2s;
+}
+
+.sp-yesno-card:hover {
+  border-color: var(--slate-300);
+}
+
+.sp-yesno-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sp-yesno-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--slate-700);
+  flex: 1;
+}
+
+.sp-yesno-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--slate-700);
+  font-weight: 500;
+}
+
+/* ─── App Chip ──────────────────────────────────────────────────────────────── */
+.sp-apps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sp-app-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--gold-400);
+  box-shadow: var(--shadow-sm);
+}
+
+.sp-app-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-500);
+  background: var(--gold-50);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.sp-app-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--slate-800);
+  flex: 1;
+}
+
+.sp-app-course {
+  font-size: 0.8rem;
+  color: var(--slate-500);
+}
+
+.sp-app-intake {
+  font-size: 0.78rem;
+  color: var(--navy-500);
+  font-weight: 500;
+  background: var(--navy-50);
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+}
+
+.sp-doc-remove {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--slate-100);
+  color: var(--slate-500);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.sp-doc-remove:hover {
+  background: var(--red-100);
+  color: var(--red-500);
+}
+
+/* ─── Dropzone ──────────────────────────────────────────────────────────────── */
+.sp-dropzone {
+  margin-top: 1rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--slate-50);
+}
+
+.sp-dropzone:hover,
+.sp-dropzone.dragover {
+  border-color: var(--navy-400);
+  background: var(--navy-50);
+}
+
+.sp-dropzone-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.sp-dropzone-text {
+  font-size: 0.9rem;
+  color: var(--slate-600);
+  margin-bottom: 0.35rem;
+}
+
+.sp-dropzone-text span {
+  color: var(--navy-500);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sp-dropzone-hint {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+}
+
+/* ─── Uploaded Documents ────────────────────────────────────────────────────── */
+.sp-uploaded-list {
+  margin-top: 1.25rem;
+}
+
+.sp-uploaded-list h4 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate-400);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.sp-uploaded-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.sp-doc-icon {
+  font-size: 1.1rem;
+}
+
+.sp-doc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sp-doc-name {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--slate-800);
+}
+
+.sp-doc-meta {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--slate-400);
+  margin-top: 1px;
+}
+
+/* ─── Doc Checklist ─────────────────────────────────────────────────────────── */
+.sp-doc-checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.sp-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--slate-500);
+  padding: 0.4rem 0.1rem;
+}
+
+.sp-check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--slate-100);
+  color: var(--slate-400);
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sp-checklist-item.done {
+  color: var(--slate-700);
+}
+
+.sp-checklist-item.done .sp-check-icon {
+  background: var(--green-100);
+  color: var(--green-500);
+  font-weight: 700;
+}
+
+/* ─── Summary Card ──────────────────────────────────────────────────────────── */
+.sp-summary-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.sp-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sp-summary-item span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--slate-500);
+  font-weight: 700;
+}
+
+.sp-summary-item strong {
+  font-size: 0.9rem;
+  color: var(--slate-800);
+}
+
+.sp-status-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: var(--gold-50);
+  color: var(--gold-500);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────────────────── */
+.sp-btn-primary {
+  padding: 0.6rem 1.25rem;
+  background: var(--navy-700);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.sp-btn-primary:hover {
+  background: var(--navy-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.sp-btn-secondary {
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--slate-600);
+  background: var(--white);
+  transition: all 0.15s;
+}
+
+.sp-btn-secondary:hover {
+  border-color: var(--navy-400);
+  color: var(--navy-600);
+}
+
+.sp-btn-ghost {
+  padding: 0.6rem 1.25rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--slate-600);
+  background: var(--white);
+  transition: all 0.15s;
+}
+
+.sp-btn-ghost:hover {
+  border-color: var(--slate-300);
+  background: var(--slate-50);
+}
+
+/* ─── App Actions ───────────────────────────────────────────────────────────── */
+.sp-app-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* ─── Visa Entry Form ───────────────────────────────────────────────────────── */
+.sp-visa-entry-form {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--navy-400);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── Nav Footer ────────────────────────────────────────────────────────────── */
+.sp-nav-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.sp-nav-right {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.sp-nav-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.sp-nav-prev {
+  color: var(--slate-600);
+  border: 1.5px solid var(--border);
+  background: var(--white);
+}
+
+.sp-nav-prev:hover {
+  border-color: var(--slate-300);
+  background: var(--slate-50);
+}
+
+.sp-nav-draft {
+  color: var(--slate-600);
+  border: 1.5px solid var(--border);
+  background: var(--white);
+}
+
+.sp-nav-draft:hover {
+  border-color: var(--slate-300);
+}
+
+.sp-nav-next {
+  background: var(--navy-800);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(15, 33, 71, 0.3);
+}
+
+.sp-nav-next:hover {
+  background: var(--navy-700);
+  transform: translateY(-1px);
+}
+
+.sp-nav-submit {
+  background: linear-gradient(135deg, var(--green-500), #16B978);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26, 158, 107, 0.3);
+}
+
+.sp-nav-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(26, 158, 107, 0.4);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ENQUIRY FORM STYLES
+════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Enquiry Banner ────────────────────────────────────────────────────────── */
+.sp-enq-banner {
+  background: linear-gradient(135deg, #143274 0%, #69c3ff 100%);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sp-enq-banner::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(240, 180, 41, 0.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.sp-enq-banner-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.sp-enq-banner h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.sp-enq-banner p {
+  font-size: 0.82rem;
+  color: var(--navy-100);
+  opacity: 0.7;
+  margin-top: 0.35rem;
+  line-height: 1.5;
+}
+
+/* ─── Source Buttons ────────────────────────────────────────────────────────── */
+.sp-source-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.sp-source-btn {
+  padding: 0.45rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--slate-600);
+  background: var(--white);
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sp-source-btn:hover {
+  border-color: var(--navy-400);
+  color: var(--navy-600);
+}
+
+.sp-source-btn.selected {
+  background: var(--navy-700);
+  border-color: var(--navy-700);
+  color: #fff;
+}
+
+/* ─── Interest Tags ─────────────────────────────────────────────────────────── */
+.sp-interest-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.sp-interest-btn {
+  padding: 0.4rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--slate-600);
+  background: var(--white);
+  transition: all 0.15s;
+}
+
+.sp-interest-btn:hover {
+  border-color: var(--teal-500);
+  color: var(--teal-500);
+}
+
+.sp-interest-btn.selected {
+  background: var(--teal-500);
+  border-color: var(--teal-500);
+  color: #fff;
+}
+
+/* ─── Priority Buttons ──────────────────────────────────────────────────────── */
+.sp-priority-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sp-priority-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 0.55rem 0.5rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--slate-500);
+  background: var(--white);
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.sp-priority-btn:hover {
+  border-color: var(--slate-300);
+}
+
+.sp-priority-btn.p-low.selected {
+  background: var(--green-100);
+  border-color: var(--green-500);
+  color: var(--green-500);
+}
+
+.sp-priority-btn.p-medium.selected {
+  background: var(--gold-50);
+  border-color: var(--gold-500);
+  color: var(--gold-500);
+}
+
+.sp-priority-btn.p-high.selected {
+  background: var(--red-100);
+  border-color: var(--red-500);
+  color: var(--red-500);
+}
+
+.sp-priority-btn.p-urgent.selected {
+  background: #3D0000;
+  border-color: #900;
+  color: #FF6B6B;
+}
+
+/* ─── Follow-up Timeline ────────────────────────────────────────────────────── */
+.sp-followup-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sp-followup-btn {
+  padding: 0.45rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--slate-600);
+  background: var(--white);
+  transition: all 0.15s;
+}
+
+.sp-followup-btn:hover {
+  border-color: var(--navy-400);
+  color: var(--navy-600);
+}
+
+.sp-followup-btn.selected {
+  background: var(--navy-50);
+  border-color: var(--navy-500);
+  color: var(--navy-700);
+}
+
+/* ─── Enquiry Summary Grid ──────────────────────────────────────────────────── */
+.sp-enq-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sp-enq-sum-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sp-enq-sum-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--slate-500);
+}
+
+.sp-enq-sum-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--slate-800);
+}
+
+.sp-enq-sum-value.empty {
+  color: var(--slate-300);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ─── Consent Box ───────────────────────────────────────────────────────────── */
+.sp-consent-box {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.875rem 1rem;
+  background: var(--slate-50);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.sp-consent-box input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--navy-600);
+  width: 15px;
+  height: 15px;
+}
+
+.sp-consent-text {
+  font-size: 0.8rem;
+  color: var(--slate-600);
+  line-height: 1.5;
+}
+
+.sp-consent-text a {
+  color: var(--navy-500);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.sp-consent-text a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Success Card ──────────────────────────────────────────────────────────── */
+.sp-success-card {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, var(--navy-50) 0%, var(--white) 100%);
+  border: 1px solid var(--navy-100);
+  border-radius: var(--radius-lg);
+}
+
+.sp-success-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.sp-success-card h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy-800);
+  margin-bottom: 0.5rem;
+}
+
+.sp-success-card p {
+  font-size: 0.875rem;
+  color: var(--slate-500);
+  max-width: 360px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.sp-success-ref {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background: var(--gold-50);
+  border: 1px solid var(--gold-100);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold-500);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sp-grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sp-grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sp-main-inner {
+    padding: 2rem 1.5rem 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sp-body {
+    flex-direction: column;
+  }
+
+  .sp-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+  }
+
+  .sp-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sp-enq-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-nav-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .sp-nav-right {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .sp-nav-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sp-summary-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .sp-app-actions {
+    flex-direction: column;
+  }
+
+  .sp-doc-checklist {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .sp-topbar {
+    padding: 0 1rem;
+  }
+
+  .sp-fetch-area {
+    display: none;
+  }
+
+  .sp-step-intro h2 {
+    font-size: 1.4rem;
+  }
+
+  .sp-radio-group {
+    flex-wrap: wrap;
+  }
+
+  .sp-radio-label {
+    flex: 1;
+    justify-content: center;
+  }
+}
